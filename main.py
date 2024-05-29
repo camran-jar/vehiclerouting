@@ -98,10 +98,10 @@ def savings_heuristic(px, py, demand, capacity, depot):
     savings = []
     for i in range(1, num_customers + 1):
         for j in range(i + 1, num_customers + 1):
-            savings_ij = calculate_euclidean_distance(px, py, depot, i) + \
+            savingsIJ = calculate_euclidean_distance(px, py, depot, i) + \
                          calculate_euclidean_distance(px, py, depot, j) - \
                          calculate_euclidean_distance(px, py, i, j)
-            savings.append((savings_ij, i, j))
+            savings.append((savingsIJ, i, j))
     
     savings.sort(reverse=True, key=lambda x: x[0])
     
@@ -116,21 +116,21 @@ def savings_heuristic(px, py, demand, capacity, depot):
 
     # Apply savings to merge routes
     for saving, i, j in savings:
-        route_i = find_route(i, routes)
-        route_j = find_route(j, routes)
+        routeI = find_route(i, routes)
+        routeJ = find_route(j, routes)
         
-        if route_i != route_j:
-            load_i = sum(demand[node] for node in route_i)
-            load_j = sum(demand[node] for node in route_j)
-            if load_i + load_j <= capacity:
-                routes.remove(route_i)
-                routes.remove(route_j)
-                new_route = route_i + route_j
+        if routeI != routeJ:
+            loadI = sum(demand[node] for node in routeI)
+            loadJ = sum(demand[node] for node in routeJ)
+            if loadI + loadJ <= capacity:
+                routes.remove(routeI)
+                routes.remove(routeJ)
+                new_route = routeI + routeJ
                 routes.append(new_route)
     
-    final_routes = [[depot] + route + [depot] for route in routes]
+    final = [[depot] + route + [depot] for route in routes]
     
-    return final_routes
+    return final
 
 if __name__ == '__main__':
     main()

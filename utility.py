@@ -25,14 +25,14 @@ def calculate_total_distance(routes, px, py, depot):
     :param depot: Depot.
     :return: Total tour Euclidean distance.
     """
-    total_distance = 0
+    total_dist = 0
     for r in routes:
-        current_node = depot
+        curr_node = depot
         for next_node in r:
-            total_distance += calculate_euclidean_distance(px, py, current_node, next_node)
-            current_node = next_node
-        total_distance += calculate_euclidean_distance(px, py, current_node, depot)
-    return total_distance
+            total_dist += calculate_euclidean_distance(px, py, curr_node, next_node)
+            curr_node = next_node
+        total_dist += calculate_euclidean_distance(px, py, curr_node, depot)
+    return total_dist
 
 
 def visualise_solution(vrp_sol, px, py, depot, title):
