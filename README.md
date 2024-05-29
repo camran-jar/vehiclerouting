@@ -1,6 +1,11 @@
 # vehiclerouting
 Solve vehicle routing problem using heuristics.
 
+Ran with a virtual enviroment
+to activate venv
+
+/path/to/directory source /venv/bin/activate
+
 To test on the different VRP files, comment/uncomment in the main.py file
 
     # Paths to the data and solution files.
