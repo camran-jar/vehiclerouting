@@ -94,7 +94,7 @@ def savings_heuristic(px, py, demand, capacity, depot):
     """
     num_customers = len(px) - 1  # exclude the depot
 
-    # Step 1: Calculate initial savings
+    #Calculate initial savings
     savings = []
     for i in range(1, num_customers + 1):
         for j in range(i + 1, num_customers + 1):
@@ -105,7 +105,7 @@ def savings_heuristic(px, py, demand, capacity, depot):
     
     savings.sort(reverse=True, key=lambda x: x[0])
     
-    # Step 2: Initialize each customer with its own route
+    # Initialise each customer with its own route
     routes = [[i] for i in range(1, num_customers + 1)]
     current_loads = {i: demand[i] for i in range(1, num_customers + 1)}
     
@@ -114,7 +114,7 @@ def savings_heuristic(px, py, demand, capacity, depot):
             if node in route:
                 return route
 
-    # Step 3: Apply savings to merge routes
+    # Apply savings to merge routes
     for saving, i, j in savings:
         route_i = find_route(i, routes)
         route_j = find_route(j, routes)
@@ -128,8 +128,8 @@ def savings_heuristic(px, py, demand, capacity, depot):
                 new_route = route_i + route_j
                 routes.append(new_route)
     
-    # Convert routes to include depot at start and end
     final_routes = [[depot] + route + [depot] for route in routes]
+    
     return final_routes
 
 if __name__ == '__main__':
